@@ -63,3 +63,6 @@ class Level_model extends CI_Model
 		return $this->db->update('level', $data, array('id' => $id));
 	}
 }
+
+/* End of file level_model.php */
+/* Location: ./application/models/references/level_model.php */

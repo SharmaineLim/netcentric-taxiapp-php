@@ -7,3 +7,6 @@ class Report extends CI_Controller
 		
 	}
 }
+
+/* End of file report.php */
+/* Location: ./application/controllers/report.php */

@@ -7,3 +7,6 @@ class Comment extends CI_Controller
 		
 	}
 }
+
+/* End of file comment.php */
+/* Location: ./application/controllers/comment.php */

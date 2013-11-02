@@ -7,3 +7,6 @@ class Account_model extends CI_Model
 		$this->load->database();
 	}
 }
+
+/* End of file account_model.php */
+/* Location: ./application/models/account_model.php */

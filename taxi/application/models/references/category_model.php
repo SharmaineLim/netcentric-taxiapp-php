@@ -16,3 +16,6 @@ class Category_model extends CI_Model
 		}
 	}
 }
+
+/* End of file category_model.php */
+/* Location: ./application/models/references/category_model.php */

@@ -29,3 +29,6 @@ class Level extends CI_Controller
 		$this->load->view('templates/footer');
 	}
 }
+
+/* End of file level.php */
+/* Location: ./application/controllers/references/level.php */

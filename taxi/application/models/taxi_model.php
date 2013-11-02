@@ -7,3 +7,6 @@ class Taxi_model extends CI_Model
 		$this->load->database();
 	}
 }
+
+/* End of file taxi_model.php */
+/* Location: ./application/models/taxi_model.php */

@@ -7,3 +7,6 @@ class Report_model extends CI_Model
 		$this->load->database();
 	}
 }
+
+/* End of file report_model.php */
+/* Location: ./application/models/report_model.php */

@@ -7,3 +7,6 @@ class Comment_model extends CI_Model
 		$this->load->database();
 	}
 }
+
+/* End of file comment_model.php */
+/* Location: ./application/models/comment_model.php */

@@ -7,3 +7,6 @@ class Taxi extends CI_Controller
 		
 	}
 }
+
+/* End of file taxi.php */
+/* Location: ./application/controllers/taxi.php */

@@ -15,7 +15,7 @@
 			</form>
 		</div>
 		<?php foreach ($levels as $level_item): ?>
-			<?php echo $level_item['id'].' : '.$level_item['level'] ?><br />
+			<?= $level_item['id'].' : '.$level_item['level'] ?><br />
 		<?php endforeach ?>
 	</div>
 </div>

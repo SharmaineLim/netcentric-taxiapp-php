@@ -16,3 +16,6 @@ class Subcategory_model extends CI_Model
 		}
 	}
 }
+
+/* End of file subcategory_model.php */
+/* Location: ./application/models/references/subcategory_model.php */

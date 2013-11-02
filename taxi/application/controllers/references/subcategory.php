@@ -7,3 +7,6 @@ class Subcategory extends CI_Controller
 		
 	}
 }
+
+/* End of file subcategory.php */
+/* Location: ./application/controllers/references/subcategory.php */
