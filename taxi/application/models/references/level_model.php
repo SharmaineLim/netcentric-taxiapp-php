@@ -23,7 +23,7 @@ class Level_model extends CI_Model
 		$this->db->order_by('id', 'desc');
 		
 		/* Retrieve all */
-		if ($data == FALSE)
+		if ($data === FALSE)
 		{
 			$query = $this->db->get('level');
 			return $query->result_array();
