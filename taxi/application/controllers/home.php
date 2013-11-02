@@ -6,7 +6,7 @@ class Home extends CI_Controller
 	{
 		$this->load->library('user_agent');
 		
-		if ($this->agent->is_mobile && !$this->agent->is_browser)
+		if ($this->agent->is_mobile && ! $this->agent->is_browser)
 		{
 			/* Code here */
 			/* This is used as proof that the user_agent library is usable */
