@@ -2,6 +2,6 @@
 	<h1>Welcome to the Taxi App!</h1>
 
 	<div id="body">
-		<p>Please move on forward to the other pages!</p>
+		<p>Taaaaxi taxi</p>
 	</div>
 </div>

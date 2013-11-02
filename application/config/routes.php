@@ -40,10 +40,28 @@
 
 //$route[''] = "";
 
+$route['subcategory/(:any)'] = "references/subcategory";
+$route['subcategory'] = "references/subcategory";
+
+$route['category/(:any)'] = "references/category";
+$route['category'] = "references/category";
+
+$route['level/(:any)'] = "references/level";
+$route['level'] = "references/level";
+
+$route['account/(:any)'] = "account";
 $route['account'] = "account";
+
+$route['comment/(:any)'] = "comment";
 $route['comment'] = "comment";
+
+$route['report/(:any)'] = "report";
 $route['report'] = "report";
+
+$route['taxi/(:any)'] = "taxi";
 $route['taxi'] = "taxi";
+
+$route['home/(:any)'] = "home";
 $route['home'] = "home";
 $route['default_controller'] = "home";
 
