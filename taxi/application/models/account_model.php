@@ -2,10 +2,7 @@
 
 class Account_model extends CI_Model
 {
-	public function __construct()
-	{
-		$this->load->database();
-	}
+	
 }
 
 /* End of file account_model.php */
