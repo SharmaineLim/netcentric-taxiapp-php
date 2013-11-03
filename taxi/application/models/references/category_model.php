@@ -14,7 +14,7 @@ class Category_model extends CI_Model
 
 	public function retrieve($data = FALSE)
 	{
-		$this->db->order_by('id', 'desc');
+		$this->db->order_by('category', 'asc');
 		
 		/* Retrieve all */
 		if ($data === FALSE)
