@@ -43,15 +43,13 @@ class Level_model extends CI_Model
 			return;
 		}
 
-		$level = array(
-			'level' => $data['level']
-		);
-
 		$id = array(
 			'id' => $data['id']
 		);
 
-		return $this->db->update('level', $level, $id);
+		unset($data['id']);
+
+		return $this->db->update('level', $data, $id);
 	}
 }
 

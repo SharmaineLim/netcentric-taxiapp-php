@@ -43,15 +43,13 @@ class Category_model extends CI_Model
 			return;
 		}
 
-		$category = array(
-			'category' => $data['category']
-		);
-
 		$id = array(
 			'id' => $data['id']
 		);
 
-		return $this->db->update('category', $category, $id);
+		unset($data['id']);
+
+		return $this->db->update('category', $data, $id);
 	}
 }
 
