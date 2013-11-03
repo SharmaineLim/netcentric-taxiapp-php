@@ -72,7 +72,9 @@ class Category extends CI_Controller
 				return $this->index();
 			}
 
-			$data['category'] = $this->category_model->retrieve($id);
+			$data2['id'] = $id;
+
+			$data['category'] = $this->category_model->retrieve($data2);
 			$data['title'] = 'Update category';
 
 			if (empty($data['category']))

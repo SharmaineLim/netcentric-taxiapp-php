@@ -97,6 +97,15 @@ class Subcategory extends CI_Controller
 				return $this->index();
 			}
 
+			$data2['id'] = $id;
+			
+			$data['subcategory'] = $this->subcategory_model->retrieve($data2);
+
+			if (empty($data['subcategory']))
+			{
+				show_404();
+			}
+
 			$data['categories'] = $this->category_model->retrieve();
 
 			if (empty($data['categories']))
@@ -111,15 +120,6 @@ class Subcategory extends CI_Controller
 			{
 				echo anchor('level/create', 'Please create a level');
 				return;
-			}
-
-			$data2['id'] = $id;
-			
-			$data['subcategory'] = $this->subcategory_model->retrieve($data2);
-
-			if (empty($data['subcategory']))
-			{
-				show_404();
 			}
 
 			$data['title'] = 'Add a New Subcategory';

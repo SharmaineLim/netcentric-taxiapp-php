@@ -17,21 +17,21 @@ class Level_model extends CI_Model
 		$this->db->order_by('id', 'desc');
 		
 		/* Retrieve all */
-		if ($data === FALSE)
+		if ($data === FALSE OR empty($data))
 		{
 			$query = $this->db->get('level');
 			return $query->result_array();
 		}
 
 		/* Retrieve by id */
-		if (ctype_digit($data))
+		if (ctype_digit($data['id']))
 		{
-			$query = $this->db->get_where('level', array('id' => $data));
+			$query = $this->db->get_where('level', array('id' => $data['id']));
 			return $query->row_array();
 		}
 
 		/* Retrieve by level */
-		$query = $this->db->get_where('level', array('level' => $data));
+		$query = $this->db->get_where('level', array('level' => $data['level']));
 		return $query->row_array();
 	}
 

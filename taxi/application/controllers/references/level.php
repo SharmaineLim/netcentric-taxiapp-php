@@ -72,7 +72,9 @@ class Level extends CI_Controller
 				return $this->index();
 			}
 
-			$data['level'] = $this->level_model->retrieve($id);
+			$data2['id'] = $id;
+
+			$data['level'] = $this->level_model->retrieve($data2);
 			$data['title'] = 'Update Level';
 
 			if (empty($data['level']))
