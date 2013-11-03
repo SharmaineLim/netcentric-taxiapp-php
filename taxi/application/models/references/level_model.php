@@ -4,10 +4,12 @@ class Level_model extends CI_Model
 {
 	public function create($data)
 	{
-		if ($data !== NULL)
+		if ($data === NULL OR empty($data))
 		{
-			return $this->db->insert('level', $data);
+			return;
 		}
+
+		return $this->db->insert('level', $data);
 	}
 
 	public function retrieve($data = FALSE)
@@ -37,22 +39,22 @@ class Level_model extends CI_Model
 	}
 
 	/* Uncertain if this would work */
-	public function update()
+	public function update($data)
 	{
-		$this->load->helper('url');
-
-		$id = $this->input->post('id');
-
-		if (empty($id))
+		if ($data === NULL OR empty($data))
 		{
 			return;
 		}
 
-		$data = array(
-			'level' => $this->input->post('level')
+		$level = array(
+			'level' => $data['level']
 		);
 
-		return $this->db->update('level', $data, array('id' => $id));
+		$id = array(
+			'id' => $data['id']
+		);
+
+		return $this->db->update('level', $level, $id);
 	}
 }
 
