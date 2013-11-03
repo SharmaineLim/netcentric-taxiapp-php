@@ -11,7 +11,7 @@
 		<input type="input" name="plate_number" value="<?php echo $taxi['plate_number'] ?>" disabled /><br />
 
 		<label for="company">Company</label>
-		<input type="input" name="company" value="<?php echo $taxi['company'] ?>" disabled /><br /><br />
+		<input type="input" name="company" value="<?php echo $taxi['company'] ?>" /><br /><br />
 
 		<input type="submit" name="submit" value="Update Taxi" />
 

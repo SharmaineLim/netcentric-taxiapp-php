@@ -26,7 +26,6 @@ class Taxi extends CI_Controller
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('plate_number', 'Plate Number', 'required');
-		$this->form_validation->set_rules('company', 'Company', 'required');
 
 		if ($this->form_validation->run() === TRUE)
 		{
@@ -50,7 +49,46 @@ class Taxi extends CI_Controller
 
 	public function update($id = FALSE)
 	{
+		$this->load->helper('url');
 
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('company', 'Company', 'required');
+
+		if ($this->form_validation->run() === TRUE)
+		{
+			$data = array(
+				'id_taxi' => $id,
+				'company' => $this->input->post('company')
+			);
+
+			$this->taxi_model->update($data);
+			$this->index();
+		}
+		else
+		{
+			if ($id === FALSE)
+			{
+				return $this->index();
+			}
+
+			$data2['id'] = $id;
+
+			$data['taxi'] = $this->taxi_model->retrieve($data2);
+			$data['title'] = 'Update Taxi';
+
+			if (empty($data['taxi']))
+			{
+				show_404();
+			}
+
+			$data['taxi']['id'] = $id;
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('taxi/update', $data);
+			$this->load->view('templates/footer');
+		}
 	}
 }
 

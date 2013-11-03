@@ -9,6 +9,13 @@ class Taxi_model extends CI_Model
 			return;
 		}
 
+		$data['no_company'] = TRUE;
+		if ( ! empty($this->retrieve($data)))
+		{
+			return FALSE;
+		}
+		unset($data['no_company']);
+
 		$data2 = array(
 			'company' => $data['company']
 		);
@@ -79,22 +86,34 @@ class Taxi_model extends CI_Model
 			return NULL;
 		}
 
+		$id_taxi = 0;
+
 		if ( ! (array_key_exists('id', $data) && ctype_digit($data['id'])))
 		{
-			return NULL;
+			if ( ! (array_key_exists('id_taxi', $data) && ctype_digit($data['id_taxi'])))
+			{
+				return NULL;
+			}
+
+			$id_taxi = $data['id_taxi'];
+		}
+		else
+		{
+			$id_taxi = $data['id'];
 		}
 
 		/* Retrieve all by taxi id */
 		if (array_key_exists('all', $data))
 		{
-			$query = $this->db->get_where('taxi_revision', array('id_taxi' => $data['id']));
+			$query = $this->db->get_where('taxi_revision', array('id_taxi' => $id_taxi));
 			return $query->result_array();
 		}
 
 		/* Get MAX(id) by taxi id */
 		$this->db->select_max('id');
-		$query = $this->db->get_where('taxi_revision', array('id_taxi' => $data['id']));
+		$query = $this->db->get_where('taxi_revision', array('id_taxi' => $id_taxi));
 		$id = $query->row_array()['id'];
+		//echo $id;
 
 		/* Retrieve latest by taxi id */
 		$query = $this->db->get_where('taxi_revision',array('id' => $id));
@@ -109,13 +128,10 @@ class Taxi_model extends CI_Model
 			return;
 		}
 
-		$id = array(
-			'id' => $data['id']
-		);
-
-		unset($data['id']);
-
-		return $this->db->update('taxi', $data, $id);
+		if ($data['company'] !== $this->retrieve_history($data)['company'])
+		{
+			return $this->db->insert('taxi_revision', $data);
+		}
 	}
 }
 
