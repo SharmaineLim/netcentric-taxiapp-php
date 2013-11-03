@@ -51,7 +51,7 @@ CREATE TABLE `account_login` (
   `password` varchar(100) NOT NULL,
   `salt` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `account_login.idAccount` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  CONSTRAINT `account_login.id_account` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -73,16 +73,16 @@ DROP TABLE IF EXISTS `account_revision`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `account_revision` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idAccount` int(11) NOT NULL,
+  `id_account` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `email` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `accountType` tinyint(4) NOT NULL,
-  `isPasswordChanged` bit(1) NOT NULL,
-  `isBanned` bit(1) NOT NULL,
+  `type_account` tinyint(4) NOT NULL,
+  `is_password_changed` bit(1) NOT NULL,
+  `is_banned` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `account_revision.idAccount_idx` (`idAccount`),
-  CONSTRAINT `account_revision.idAccount` FOREIGN KEY (`idAccount`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  KEY `account_revision.id_account_idx` (`id_account`),
+  CONSTRAINT `account_revision.id_account` FOREIGN KEY (`id_account`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -128,13 +128,13 @@ DROP TABLE IF EXISTS `comment`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idAuthor` int(11) NOT NULL,
-  `idReport` int(11) NOT NULL,
+  `id_author` int(11) NOT NULL,
+  `id_report` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `comment.idAuthor_idx` (`idAuthor`),
-  KEY `comment.idAeport_idx` (`idReport`),
-  CONSTRAINT `comment.idAuthor` FOREIGN KEY (`idAuthor`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `comment.idReport` FOREIGN KEY (`idReport`) REFERENCES `report` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  KEY `comment.id_author_idx` (`id_author`),
+  KEY `comment.id_aeport_idx` (`id_report`),
+  CONSTRAINT `comment.id_author` FOREIGN KEY (`id_author`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `comment.id_report` FOREIGN KEY (`id_report`) REFERENCES `report` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -156,17 +156,17 @@ DROP TABLE IF EXISTS `comment_revision`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comment_revision` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idComment` int(11) NOT NULL,
-  `idReviser` int(11) NOT NULL,
+  `id_comment` int(11) NOT NULL,
+  `id_reviser` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `comment` longtext NOT NULL,
-  `nFlagged` tinyint(4) NOT NULL,
-  `isDeleted` bit(1) NOT NULL,
+  `n_flagged` tinyint(4) NOT NULL,
+  `is_deleted` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `comment_revision.idComment_idx` (`idComment`),
-  KEY `comment_revision.idReviser_idx` (`idReviser`),
-  CONSTRAINT `comment_revision.idComment` FOREIGN KEY (`idComment`) REFERENCES `comment` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `comment_revision.idReviser` FOREIGN KEY (`idReviser`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  KEY `comment_revision.id_comment_idx` (`id_comment`),
+  KEY `comment_revision.id_reviser_idx` (`id_reviser`),
+  CONSTRAINT `comment_revision.id_comment` FOREIGN KEY (`id_comment`) REFERENCES `comment` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `comment_revision.id_reviser` FOREIGN KEY (`id_reviser`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -210,15 +210,15 @@ DROP TABLE IF EXISTS `facebook_account`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `facebook_account` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idAccount` int(11) NOT NULL,
-  `idFacebook` int(20) NOT NULL,
-  `startTimestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `endTimestamp` timestamp NULL DEFAULT NULL,
+  `id_account` int(11) NOT NULL,
+  `id_facebook` int(20) NOT NULL,
+  `start_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `end_timestamp` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `facebook_account.idAccount_idx` (`idAccount`),
-  KEY `facebook_account.idFacebook_idx` (`idFacebook`),
-  CONSTRAINT `facebook_account.idAccount` FOREIGN KEY (`idAccount`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `facebook_account.idFacebook` FOREIGN KEY (`idFacebook`) REFERENCES `facebook` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  KEY `facebook_account.id_account_idx` (`id_account`),
+  KEY `facebook_account.id_facebook_idx` (`id_facebook`),
+  CONSTRAINT `facebook_account.id_account` FOREIGN KEY (`id_account`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `facebook_account.id_facebook` FOREIGN KEY (`id_facebook`) REFERENCES `facebook` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -265,13 +265,13 @@ DROP TABLE IF EXISTS `report`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `report` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idAuthor` int(11) NOT NULL,
-  `idTaxi` int(11) NOT NULL,
+  `id_author` int(11) NOT NULL,
+  `id_taxi` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `report.idAuthor_idx` (`idAuthor`),
-  KEY `report.idTaxi_idx` (`idTaxi`),
-  CONSTRAINT `report.idAuthor` FOREIGN KEY (`idAuthor`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `report.idTaxi` FOREIGN KEY (`idTaxi`) REFERENCES `taxi` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  KEY `report.id_author_idx` (`id_author`),
+  KEY `report.id_taxi_idx` (`id_taxi`),
+  CONSTRAINT `report.id_author` FOREIGN KEY (`id_author`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `report.id_taxi` FOREIGN KEY (`id_taxi`) REFERENCES `taxi` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -293,23 +293,23 @@ DROP TABLE IF EXISTS `report_revision`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `report_revision` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idReport` int(11) NOT NULL,
-  `idReviser` int(11) NOT NULL,
-  `idSubcategory` int(11) NOT NULL,
+  `id_report` int(11) NOT NULL,
+  `id_reviser` int(11) NOT NULL,
+  `id_subcategory` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `driverName` varchar(100) NOT NULL,
+  `driver_name` varchar(100) NOT NULL,
   `location` varchar(100) NOT NULL,
   `picture` longblob NOT NULL,
   `report` longtext NOT NULL,
-  `nFlagged` tinyint(4) NOT NULL,
-  `isDeleted` bit(1) NOT NULL,
+  `n_flagged` tinyint(4) NOT NULL,
+  `is_deleted` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `report_revision.idReport_idx` (`idReport`),
-  KEY `report_revision.idReviser_idx` (`idReviser`),
-  KEY `report_reviison.idSubcategory_idx` (`idSubcategory`),
-  CONSTRAINT `report_reviison.idSubcategory` FOREIGN KEY (`idSubcategory`) REFERENCES `subcategory` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `report_revision.idReport` FOREIGN KEY (`idReport`) REFERENCES `report` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `report_revision.idReviser` FOREIGN KEY (`idReviser`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  KEY `report_revision.id_report_idx` (`id_report`),
+  KEY `report_revision.id_reviser_idx` (`id_reviser`),
+  KEY `report_reviison.id_subcategory_idx` (`id_subcategory`),
+  CONSTRAINT `report_reviison.id_subcategory` FOREIGN KEY (`id_subcategory`) REFERENCES `subcategory` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `report_revision.id_report` FOREIGN KEY (`id_report`) REFERENCES `report` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `report_revision.id_reviser` FOREIGN KEY (`id_reviser`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -331,15 +331,15 @@ DROP TABLE IF EXISTS `subcategory`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `subcategory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idCategory` int(11) NOT NULL,
-  `idLevel` int(11) NOT NULL,
+  `id_category` int(11) NOT NULL,
+  `id_level` int(11) NOT NULL,
   `subcategory` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `subcategory_UNIQUE` (`subcategory`),
-  KEY `subcategory.idCategory_idx` (`idCategory`),
-  KEY `subcategory.idLevel_idx` (`idLevel`),
-  CONSTRAINT `subcategory.idCategory` FOREIGN KEY (`idCategory`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `subcategory.idLevel` FOREIGN KEY (`idLevel`) REFERENCES `level` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  KEY `subcategory.id_category_idx` (`id_category`),
+  KEY `subcategory.id_level_idx` (`id_level`),
+  CONSTRAINT `subcategory.id_category` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `subcategory.id_level` FOREIGN KEY (`id_level`) REFERENCES `level` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -361,9 +361,9 @@ DROP TABLE IF EXISTS `taxi`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `taxi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `plateNumber` varchar(10) NOT NULL,
+  `plate_number` varchar(10) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `plateNumber_UNIQUE` (`plateNumber`)
+  UNIQUE KEY `plate_number_UNIQUE` (`plate_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -385,12 +385,12 @@ DROP TABLE IF EXISTS `taxi_revision`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `taxi_revision` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idTaxi` int(11) NOT NULL,
+  `id_taxi` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `company` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `taxi_revision.idTaxi_idx` (`idTaxi`),
-  CONSTRAINT `taxi_revision.idTaxi` FOREIGN KEY (`idTaxi`) REFERENCES `taxi` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  KEY `taxi_revision.id_taxi_idx` (`id_taxi`),
+  CONSTRAINT `taxi_revision.id_taxi` FOREIGN KEY (`id_taxi`) REFERENCES `taxi` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
