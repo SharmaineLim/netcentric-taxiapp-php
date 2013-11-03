@@ -2,9 +2,32 @@
 
 class Subcategory extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('references/subcategory_model');
+	}
+
 	public function index()
 	{
-		
+		$this->load->helper('url');
+
+		$data['subcategories'] = $this->subcategory_model->retrieve();
+		$data['title'] = 'Subcategories';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('references/subcategory/index', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function create()
+	{
+
+	}
+
+	public function update($id)
+	{
+
 	}
 }
 

@@ -2,13 +2,27 @@
 
 class Subcategory_model extends CI_Model
 {
-	public function retrieve($id = FALSE)
+	public function retrieve($data = FALSE)
 	{
-		if ($id == FALSE)
+		$this->db->order_by('id', 'desc');
+		
+		/* Retrieve all */
+		if ($data === FALSE)
 		{
 			$query = $this->db->get('subcategory');
 			return $query->result_array();
 		}
+
+		/* Retrieve by id */
+		if (ctype_digit($data['id']))
+		{
+			$query = $this->db->get_where('subcategory', array('id' => $data['id']));
+			return $query->row_array();
+		}
+
+		/* Retrieve by subcategory */
+		$query = $this->db->get_where('subcategory', array('subcategory' => $data['subcategory']));
+		return $query->row_array();
 	}
 }
 
