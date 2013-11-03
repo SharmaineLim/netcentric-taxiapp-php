@@ -1,3 +1,4 @@
+
 <div id="body">
 
 	<p><?php echo anchor('category/create', 'Add a new category') ?></p>

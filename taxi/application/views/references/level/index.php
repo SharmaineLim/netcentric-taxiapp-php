@@ -1,3 +1,4 @@
+
 <div id="body">
 
 	<p><?php echo anchor('level/create', 'Add a new level') ?></p>
