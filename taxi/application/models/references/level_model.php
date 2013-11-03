@@ -31,11 +31,8 @@ class Level_model extends CI_Model
 		}
 
 		/* Retrieve by level */
-		else
-		{
-			$query = $this->db->get_where('level', array('level' => $data));
-			return $query->row_array();
-		}
+		$query = $this->db->get_where('level', array('level' => $data));
+		return $query->row_array();
 	}
 
 	/* Uncertain if this would work */
