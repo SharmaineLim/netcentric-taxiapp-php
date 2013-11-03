@@ -13,7 +13,7 @@
 				foreach ($categories as $category_item)
 				{
 					echo '<option value="'.$category_item['id'].'"';
-					if ($subcategory['idCategory'] == $category_item['id'])
+					if ($subcategory['id_category'] == $category_item['id'])
 					{
 						echo ' selected';
 					}
@@ -31,7 +31,7 @@
 				foreach ($levels as $level_item)
 				{
 					echo '<option value="'.$level_item['id'].'"';
-					if ($subcategory['idLevel'] == $level_item['id'])
+					if ($subcategory['id_level'] == $level_item['id'])
 					{
 						echo ' selected';
 					}

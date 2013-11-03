@@ -40,25 +40,39 @@
 
 //$route[''] = "";
 
-$route['subcategory/(:any)'] = "references/subcategory/$1";
+$route['subcategory/update/(:any)'] = "references/subcategory/update/$1";
+$route['subcategory/create'] = "references/subcategory/create";
+$route['subcategory/(:any)'] = "references/subcategory";
 $route['subcategory'] = "references/subcategory";
 
-$route['category/(:any)'] = "references/category/$1";
+$route['category/update/(:any)'] = "references/category/update/$1";
+$route['category/create'] = "references/category/create";
+$route['category/(:any)'] = "references/category";
 $route['category'] = "references/category";
 
-$route['level/(:any)'] = "references/level/$1";
+$route['level/update/(:any)'] = "references/level/update/$1";
+$route['level/create'] = "references/level/create";
+$route['level/(:any)'] = "references/level/";
 $route['level'] = "references/level";
 
+$route['account/update/(:any)'] = "account/update/$1";
+$route['account/create'] = "account/create";
 $route['account/(:any)'] = "account";
 $route['account'] = "account";
 
+$route['comment/update/(:any)'] = "comment/update/$1";
+$route['comment/create'] = "comment/create";
 $route['comment/(:any)'] = "comment";
 $route['comment'] = "comment";
 
+$route['report/update/(:any)'] = "report/update/$1";
+$route['report/create'] = "report/create";
 $route['report/(:any)'] = "report";
 $route['report'] = "report";
 
-$route['taxi/(:any)'] = "taxi/$1";
+$route['taxi/update/(:any)'] = "taxi/update/$1";
+$route['taxi/create'] = "taxi/create";
+$route['taxi/(:any)'] = "taxi";
 $route['taxi'] = "taxi";
 
 $route['home/(:any)'] = "home";

@@ -33,8 +33,8 @@ class Subcategory extends CI_Controller
 		if ($this->form_validation->run() === TRUE)
 		{
 			$data = array(
-				'idCategory' => $this->input->post('category'),
-				'idLevel' => $this->input->post('level'),
+				'id_category' => $this->input->post('category'),
+				'id_level' => $this->input->post('level'),
 				'subcategory' => $this->input->post('subcategory')
 			);
 
@@ -82,8 +82,8 @@ class Subcategory extends CI_Controller
 		{
 			$data = array(
 				'id' => $id,
-				'idCategory' => $this->input->post('category'),
-				'idLevel' => $this->input->post('level'),
+				'id_category' => $this->input->post('category'),
+				'id_level' => $this->input->post('level'),
 				'subcategory' => $this->input->post('subcategory')
 			);
 
