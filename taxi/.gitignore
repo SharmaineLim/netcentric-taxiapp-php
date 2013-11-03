@@ -1,0 +1,11 @@
+*/config/development
+
+*/logs/log-*.php
+*/logs/!index.html
+*/logs/!.htaccess
+
+*/cache/*
+*/cache/!index.html
+*/cache/!.htaccess
+
+*/user_guide/*
