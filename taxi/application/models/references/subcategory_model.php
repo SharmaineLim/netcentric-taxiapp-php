@@ -24,15 +24,18 @@ class Subcategory_model extends CI_Model
 		}
 
 		/* Retrieve by id */
-		if (ctype_digit($data['id']))
+		if (array_key_exists('id', $data) && ctype_digit($data['id']))
 		{
 			$query = $this->db->get_where('subcategory', array('id' => $data['id']));
 			return $query->row_array();
 		}
 
 		/* Retrieve by subcategory */
-		$query = $this->db->get_where('subcategory', array('subcategory' => $data['subcategory']));
-		return $query->row_array();
+		if (array_key_exists('subcategory', $data))
+		{
+			$query = $this->db->get_where('subcategory', array('subcategory' => $data['subcategory']));
+			return $query->row_array();
+		}
 	}
 
 	public function update($data)

@@ -24,15 +24,18 @@ class Category_model extends CI_Model
 		}
 
 		/* Retrieve by id */
-		if (ctype_digit($data['id']))
+		if (array_key_exists('id', $data) && ctype_digit($data['id']))
 		{
 			$query = $this->db->get_where('category', array('id' => $data['id']));
 			return $query->row_array();
 		}
 
 		/* Retrieve by category */
-		$query = $this->db->get_where('category', array('category' => $data['category']));
-		return $query->row_array();
+		if (array_key_exists('category', $data))
+		{
+			$query = $this->db->get_where('category', array('category' => $data['category']));
+			return $query->row_array();
+		}
 	}
 
 	/* Uncertain if this would work */
