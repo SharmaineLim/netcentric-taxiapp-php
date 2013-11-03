@@ -40,7 +40,7 @@
 
 //$route[''] = "";
 
-$route['subcategory/(:any)'] = "references/subcategory";
+$route['subcategory/(:any)'] = "references/subcategory/$1";
 $route['subcategory'] = "references/subcategory";
 
 $route['category/(:any)'] = "references/category/$1";
