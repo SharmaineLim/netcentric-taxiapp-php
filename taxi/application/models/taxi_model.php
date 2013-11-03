@@ -50,18 +50,13 @@ class Taxi_model extends CI_Model
 			return $data2;
 		}
 
+		$data2 = array();
+
 		/* Retrieve by id */
 		if (array_key_exists('id', $data) && ctype_digit($data['id']))
 		{
 			$query = $this->db->get_where('taxi', array('id' => $data['id']));
 			$data2 = $query->row_array();
-
-			if ( ! array_key_exists('no_company', $data))
-			{
-				$data2['company'] = $this->retrieve_history($data2)['company'];
-			}
-
-			return $data2;
 		}
 
 		/* Retrieve by plate number */
@@ -69,21 +64,22 @@ class Taxi_model extends CI_Model
 		{
 			$query = $this->db->get_where('taxi', array('plate_number' => $data['plate_number']));
 			$data2 = $query->row_array();
-
-			if ( ! array_key_exists('no_company', $data))
-			{
-				$data2['company'] = $this->retrieve_history($data2)['company'];
-			}
-			
-			return $data2;
 		}
+
+		/* Retrieve company */
+		if ( ! (array_key_exists('no_company', $data) OR empty($data2)))
+		{
+			$data2['company'] = $this->retrieve_history($data2)['company'];
+		}
+		
+		return $data2;
 	}
 
 	public function retrieve_history($data)
 	{
 		if ($data === NULL OR empty($data))
 		{
-			return NULL;
+			return;
 		}
 
 		$id_taxi = 0;
@@ -92,7 +88,7 @@ class Taxi_model extends CI_Model
 		{
 			if ( ! (array_key_exists('id_taxi', $data) && ctype_digit($data['id_taxi'])))
 			{
-				return NULL;
+				return;
 			}
 
 			$id_taxi = $data['id_taxi'];
