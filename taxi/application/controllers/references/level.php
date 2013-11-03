@@ -10,6 +10,45 @@ class Level extends CI_Controller
 
 	public function index()
 	{
+		$this->load->helper('url');
+
+		$data['levels'] = $this->level_model->retrieve();
+		$data['title'] = 'Levels';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('references/level/index', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function create()
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('level', 'Level', 'required');
+
+		if ($this->form_validation->run() === TRUE)
+		{
+			$data = array(
+				'level' => $this->input->post('level')
+			);
+
+			$this->level_model->create($data);
+			$this->index();
+		}
+		else
+		{
+			$data['title'] = 'Add a New Level';
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('references/level/create');
+			$this->load->view('templates/footer');
+		}
+	}
+
+	public function update($id = FALSE)
+	{
+		$this->load->helper('url');
 
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -18,15 +57,35 @@ class Level extends CI_Controller
 
 		if ($this->form_validation->run() === TRUE)
 		{
-			$this->level_model->create();
+			$data = array(
+				'id' => $id,
+				'level' => $this->input->post('level')
+			);
+
+			$this->level_model->update($data);
+			$this->index();
 		}
+		else
+		{
+			if ($id === FALSE)
+			{
+				return $this->index();
+			}
 
-		$data['levels'] = $this->level_model->retrieve();
-		$data['title'] = 'Levels';
+			$data['level'] = $this->level_model->retrieve($id);
+			$data['title'] = 'Update Level';
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('references/level/index', $data);
-		$this->load->view('templates/footer');
+			if (empty($data['level']))
+			{
+				show_404();
+			}
+
+			$data['level']['id'] = $id;
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('references/level/update', $data);
+			$this->load->view('templates/footer');
+		}
 	}
 }
 

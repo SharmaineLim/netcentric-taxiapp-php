@@ -2,13 +2,12 @@
 
 class Level_model extends CI_Model
 {
-	public function create()
+	public function create($data)
 	{
-		$this->load->helper('url');
-
-		$data = array(
-			'level' => $this->input->post('level')
-		);
+		if ($data === NULL OR empty($data))
+		{
+			return;
+		}
 
 		return $this->db->insert('level', $data);
 	}
@@ -25,14 +24,14 @@ class Level_model extends CI_Model
 		}
 
 		/* Retrieve by id */
-		if (is_int($data))
+		if (ctype_digit($data))
 		{
 			$query = $this->db->get_where('level', array('id' => $data));
 			return $query->row_array();
 		}
 
 		/* Retrieve by level */
-		if (is_string($data))
+		else
 		{
 			$query = $this->db->get_where('level', array('level' => $data));
 			return $query->row_array();
@@ -40,22 +39,22 @@ class Level_model extends CI_Model
 	}
 
 	/* Uncertain if this would work */
-	public function update()
+	public function update($data)
 	{
-		$this->load->helper('url');
-
-		$id = $this->input->post('id');
-
-		if (empty($id))
+		if ($data === NULL OR empty($data))
 		{
 			return;
 		}
 
-		$data = array(
-			'level' => $this->input->post('level')
+		$level = array(
+			'level' => $data['level']
 		);
 
-		return $this->db->update('level', $data, array('id' => $id));
+		$id = array(
+			'id' => $data['id']
+		);
+
+		return $this->db->update('level', $level, $id);
 	}
 }
 
