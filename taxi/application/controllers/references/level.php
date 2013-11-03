@@ -6,12 +6,11 @@ class Level extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('references/level_model');
+		$this->load->helper('url');
 	}
 
 	public function index()
 	{
-		$this->load->helper('url');
-
 		$data['levels'] = $this->level_model->retrieve();
 		$data['title'] = 'Levels';
 
@@ -34,7 +33,7 @@ class Level extends CI_Controller
 			);
 
 			$this->level_model->create($data);
-			$this->index();
+			redirect('level');
 		}
 		else
 		{
@@ -48,7 +47,10 @@ class Level extends CI_Controller
 
 	public function update($id = FALSE)
 	{
-		$this->load->helper('url');
+		if ($id === FALSE)
+		{
+			redirect('level');
+		}
 
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -63,15 +65,10 @@ class Level extends CI_Controller
 			);
 
 			$this->level_model->update($data);
-			$this->index();
+			redirect('level');
 		}
 		else
 		{
-			if ($id === FALSE)
-			{
-				return $this->index();
-			}
-
 			$data2['id'] = $id;
 
 			$data['level'] = $this->level_model->retrieve($data2);
@@ -79,7 +76,7 @@ class Level extends CI_Controller
 
 			if (empty($data['level']))
 			{
-				show_404();
+				redirect('level');
 			}
 
 			$data['level']['id'] = $id;

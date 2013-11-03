@@ -10,8 +10,6 @@ class Category extends CI_Controller
 
 	public function index()
 	{
-		$this->load->helper('url');
-
 		$data['categories'] = $this->category_model->retrieve();
 		$data['title'] = 'Categories';
 
@@ -34,7 +32,7 @@ class Category extends CI_Controller
 			);
 
 			$this->category_model->create($data);
-			$this->index();
+			redirect('category');
 		}
 		else
 		{
@@ -48,7 +46,10 @@ class Category extends CI_Controller
 
 	public function update($id = FALSE)
 	{
-		$this->load->helper('url');
+		if ($id === FALSE)
+		{
+			redirect('category');
+		}
 
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -63,15 +64,10 @@ class Category extends CI_Controller
 			);
 
 			$this->category_model->update($data);
-			$this->index();
+			redirect('category');
 		}
 		else
 		{
-			if ($id === FALSE)
-			{
-				return $this->index();
-			}
-
 			$data2['id'] = $id;
 
 			$data['category'] = $this->category_model->retrieve($data2);
@@ -79,7 +75,7 @@ class Category extends CI_Controller
 
 			if (empty($data['category']))
 			{
-				show_404();
+				redirect('category');
 			}
 
 			$data['category']['id'] = $id;

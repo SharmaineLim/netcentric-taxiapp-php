@@ -10,8 +10,6 @@ class Taxi extends CI_Controller
 
 	public function index()
 	{
-		$this->load->helper('url');
-
 		$data['taxis'] = $this->taxi_model->retrieve();
 		$data['title'] = 'Taxis';
 
@@ -35,7 +33,7 @@ class Taxi extends CI_Controller
 			);
 
 			$this->taxi_model->create($data);
-			$this->index();
+			redirect('taxi');
 		}
 		else
 		{
@@ -49,7 +47,10 @@ class Taxi extends CI_Controller
 
 	public function update($id = FALSE)
 	{
-		$this->load->helper('url');
+		if ($id === FALSE)
+		{
+			redirect('taxi');
+		}
 
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -64,15 +65,10 @@ class Taxi extends CI_Controller
 			);
 
 			$this->taxi_model->update($data);
-			$this->index();
+			redirect('taxi');
 		}
 		else
 		{
-			if ($id === FALSE)
-			{
-				return $this->index();
-			}
-
 			$data2['id'] = $id;
 
 			$data['taxi'] = $this->taxi_model->retrieve($data2);
@@ -80,7 +76,7 @@ class Taxi extends CI_Controller
 
 			if (empty($data['taxi']))
 			{
-				show_404();
+				redirect('taxi');
 			}
 
 			$data['taxi']['id'] = $id;

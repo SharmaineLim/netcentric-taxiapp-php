@@ -6,7 +6,6 @@ class Subcategory extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('references/subcategory_model');
-		$this->load->helper('url');
 	}
 
 	public function index()
@@ -39,7 +38,7 @@ class Subcategory extends CI_Controller
 			);
 
 			$this->subcategory_model->create($data);
-			$this->index();
+			redirect('subcategory');
 		}
 		else
 		{
@@ -69,8 +68,14 @@ class Subcategory extends CI_Controller
 
 	public function update($id = FALSE)
 	{
+		if ($id === FALSE)
+		{
+			redirect('subcategory');
+		}
+
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		
 		$this->load->model('references/category_model');
 		$this->load->model('references/level_model');
 
@@ -88,22 +93,17 @@ class Subcategory extends CI_Controller
 			);
 
 			$this->subcategory_model->update($data);
-			$this->index();
+			redirect('subcategory');
 		}
 		else
 		{
-			if ($id === FALSE)
-			{
-				return $this->index();
-			}
-
 			$data2['id'] = $id;
 			
 			$data['subcategory'] = $this->subcategory_model->retrieve($data2);
 
 			if (empty($data['subcategory']))
 			{
-				show_404();
+				redirect('subcategory');
 			}
 
 			$data['categories'] = $this->category_model->retrieve();
