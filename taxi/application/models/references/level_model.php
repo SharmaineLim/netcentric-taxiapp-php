@@ -24,14 +24,14 @@ class Level_model extends CI_Model
 		}
 
 		/* Retrieve by id */
-		if (is_int($data))
+		if (ctype_digit($data))
 		{
 			$query = $this->db->get_where('level', array('id' => $data));
 			return $query->row_array();
 		}
 
 		/* Retrieve by level */
-		if (is_string($data))
+		else
 		{
 			$query = $this->db->get_where('level', array('level' => $data));
 			return $query->row_array();
