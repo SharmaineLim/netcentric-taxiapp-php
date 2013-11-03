@@ -58,7 +58,7 @@ $route['comment'] = "comment";
 $route['report/(:any)'] = "report";
 $route['report'] = "report";
 
-$route['taxi/(:any)'] = "taxi";
+$route['taxi/(:any)'] = "taxi/$1";
 $route['taxi'] = "taxi";
 
 $route['home/(:any)'] = "home";
