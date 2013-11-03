@@ -34,6 +34,22 @@ class Subcategory_model extends CI_Model
 		$query = $this->db->get_where('subcategory', array('subcategory' => $data['subcategory']));
 		return $query->row_array();
 	}
+
+	public function update($data)
+	{
+		if ($data === NULL OR empty($data))
+		{
+			return;
+		}
+
+		$id = array(
+			'id' => $data['id']
+		);
+
+		unset($data['id']);
+
+		return $this->db->update('subcategory', $data, $id);
+	}
 }
 
 /* End of file subcategory_model.php */
