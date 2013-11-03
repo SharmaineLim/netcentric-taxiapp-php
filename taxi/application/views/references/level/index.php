@@ -15,7 +15,8 @@
 			</form>
 		</div>
 		<?php foreach ($levels as $level_item): ?>
-			<?= $level_item['id'].' : '.$level_item['level'] ?><br />
+			<?php echo anchor('level/update/'.$level_item['id'],
+				$level_item['id'].' : '.$level_item['level']) ?><br />
 		<?php endforeach ?>
 	</div>
 </div>

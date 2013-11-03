@@ -2,15 +2,12 @@
 
 class Level_model extends CI_Model
 {
-	public function create()
+	public function create($data)
 	{
-		$this->load->helper('url');
-
-		$data = array(
-			'level' => $this->input->post('level')
-		);
-
-		return $this->db->insert('level', $data);
+		if ($data !== NULL)
+		{
+			return $this->db->insert('level', $data);
+		}
 	}
 
 	public function retrieve($data = FALSE)

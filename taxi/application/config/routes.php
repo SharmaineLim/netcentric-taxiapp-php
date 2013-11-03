@@ -46,7 +46,7 @@ $route['subcategory'] = "references/subcategory";
 $route['category/(:any)'] = "references/category";
 $route['category'] = "references/category";
 
-$route['level/(:any)'] = "references/level";
+$route['level/(:any)'] = "references/level/$1";
 $route['level'] = "references/level";
 
 $route['account/(:any)'] = "account";
