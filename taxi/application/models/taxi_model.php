@@ -9,7 +9,20 @@ class Taxi_model extends CI_Model
 			return;
 		}
 
-		return $this->db->insert('taxi', $data);
+		$data2 = array(
+			'company' => $data['company']
+		);
+
+		unset($data['company']);
+
+		if ($this->db->insert('taxi', $data))
+		{
+			$data['no_company'] = TRUE;
+			$temp = $this->retrieve($data);
+			$data2['id_taxi'] = $temp['id'];
+
+			return $this->db->insert('taxi_revision', $data2);
+		}
 	}
 
 	public function retrieve($data = FALSE)
@@ -35,7 +48,12 @@ class Taxi_model extends CI_Model
 		{
 			$query = $this->db->get_where('taxi', array('id' => $data['id']));
 			$data2 = $query->row_array();
-			$data2['company'] = $this->retrieve_history($data2)['company'];
+
+			if ( ! array_key_exists('no_company', $data))
+			{
+				$data2['company'] = $this->retrieve_history($data2)['company'];
+			}
+
 			return $data2;
 		}
 
@@ -44,7 +62,12 @@ class Taxi_model extends CI_Model
 		{
 			$query = $this->db->get_where('taxi', array('plate_number' => $data['plate_number']));
 			$data2 = $query->row_array();
-			$data2['company'] = $this->retrieve_history($data2)['company'];
+
+			if ( ! array_key_exists('no_company', $data))
+			{
+				$data2['company'] = $this->retrieve_history($data2)['company'];
+			}
+			
 			return $data2;
 		}
 	}

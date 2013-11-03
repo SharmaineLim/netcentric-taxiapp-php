@@ -26,11 +26,13 @@ class Taxi extends CI_Controller
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('plate_number', 'Plate Number', 'required');
+		$this->form_validation->set_rules('company', 'Company', 'required');
 
 		if ($this->form_validation->run() === TRUE)
 		{
 			$data = array(
-				'plate_number' => $this->input->post('plate_number')
+				'plate_number' => $this->input->post('plate_number'),
+				'company' => $this->input->post('company')
 			);
 
 			$this->taxi_model->create($data);
