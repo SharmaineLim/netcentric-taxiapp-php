@@ -2,9 +2,20 @@
 
 class Subcategory_model extends CI_Model
 {
+	/*
+	 * If subcategory doesn't exist,
+	 * insert new subcategory into database
+	 */
 	public function create($data)
 	{
+		/* Check if $data has data */
 		if ($data === NULL OR empty($data))
+		{
+			return;
+		}
+
+		/* Check if subcategory exists */
+		if ( ! empty($this->retrieve($data)))
 		{
 			return;
 		}
@@ -12,6 +23,11 @@ class Subcategory_model extends CI_Model
 		return $this->db->insert('subcategory', $data);
 	}
 
+	/* 
+	 * Retrieve subcategory from database
+	 * If no parameter passed, all subcategories are returned
+	 * Can search by id or subcategory
+	 */
 	public function retrieve($data = FALSE)
 	{
 		$this->db->order_by('subcategory', 'asc');
@@ -38,19 +54,24 @@ class Subcategory_model extends CI_Model
 		}
 	}
 
+	/* 
+	 * Update subcategory at id
+	 */
 	public function update($data)
 	{
+		/* Check if $data has data */
 		if ($data === NULL OR empty($data))
 		{
 			return;
 		}
 
+		/* Put 'id' in its own array */
 		$id = array(
 			'id' => $data['id']
 		);
-
 		unset($data['id']);
 
+		/* Update 'subcategory' at $id */
 		return $this->db->update('subcategory', $data, $id);
 	}
 }
