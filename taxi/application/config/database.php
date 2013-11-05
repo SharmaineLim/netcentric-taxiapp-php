@@ -50,35 +50,22 @@
  * START User-Defined Code
  *     Get db info from application/db_config.txt
  */
-$data =& get_instance();
-$data->load->helper('file');
-$file = read_file('./application/db_config.txt');
-$temp1 = explode(';', $file);
-$file = array();
-foreach($temp1 as $item)
+$file =& get_instance();
+$file->load->helper('file');
+$temp = read_file('./application/db_config.txt');
+$temp = json_decode($temp);
+$data = array();
+if ( ! empty($temp))
 {
-	if ( ! empty($item))
-	{
-		$temp2 = explode('=', $item);
-		$temp2[0] = trim($temp2[0]);
-		$temp2[1] = trim($temp2[1]);
-		$temp2[1] = str_replace("'", '', $temp2[1]);
-
-		$file[$temp2[0]] = $temp2[1];
-	}
+	$data['username'] = $temp->{'username'};
+	$data['password'] = $temp->{'password'};
+	$data['database'] = $temp->{'database'};
 }
-
-if ( ! array_key_exists('username', $file))
+else
 {
-	$file['username'] = '';
-}
-if ( ! array_key_exists('password', $file))
-{
-	$file['password'] = '';
-}
-if ( ! array_key_exists('database', $file))
-{
-	$file['database'] = '';
+	$data['username'] = '';
+	$data['password'] = '';
+	$data['database'] = '';
 }
 /*
  * END User-Defined Code
@@ -89,9 +76,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = $file['username'];
-$db['default']['password'] = $file['password'];
-$db['default']['database'] = $file['database'];
+$db['default']['username'] = $data['username'];
+$db['default']['password'] = $data['password'];
+$db['default']['database'] = $data['database'];
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
